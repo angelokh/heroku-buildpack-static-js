@@ -55,6 +55,7 @@ echo "done"
 echo "-----> Compiling JS files..."
 find ${BUILD_DIR} -iregex ".*\.js" \! -iregex ".*\.min\.js" \! -path '*/libs/*' | while read -r jsfile
 do
+  echo -n "-----> jsfile ${jsfile}" | indent
   echo -n "-----> compiling ${jsfile#*$BUILD_DIR/}..." | indent
   fname=${jsfile%.*}
   java -jar compiler.jar --js_output_file "$fname.min.js" --js "$jsfile" | indent
@@ -63,6 +64,7 @@ do
   jssha1=${jssha1:0:8}
   cp "$fname.min.js" "$fname.$jssha1.js"
   echo "done"
+  echo -n "-----> fname $fname" | indent
 done
 echo "       done."
 
