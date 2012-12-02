@@ -74,20 +74,3 @@ do
 done
 echo "       done."
 
-# init default nginx configuration ----------
-
-if [ -d "${BUILD_DIR}/conf" ]; then
-  echo "-----> Using existing nginx configuration."
-else
-  echo -n "-----> Creating default nginx configuration."
-  mkdir ${BUILD_DIR}/conf
-  curl --silent --location https://raw.github.com/abhishekmunie/heroku-buildpack-static-js/master/conf/mime.types > ${BUILD_DIR}/conf/mime.types
-  curl --silent --location https://raw.github.com/abhishekmunie/heroku-buildpack-static-js/master/conf/nginx.conf.erb > ${BUILD_DIR}/conf/nginx.conf.erb
-  echo "done"
-fi
-
-# Static ------------------------------------
-
-curl --silent --location https://raw.github.com/abhishekmunie/heroku-buildpack-static/master/bin/compile > compile_static
-chmod +x compile_static
-./compile_static $BUILD_DIR $CACHE_DIR
