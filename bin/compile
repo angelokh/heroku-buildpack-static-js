@@ -63,8 +63,14 @@ do
   jssha1=${jssha1:0:8}
   cp "$fname.min.js" "$fname.$jssha1.js"
   echo "done"
-  rm "$jsfile"
-  echo "-----> remove $jsfile"
+
+  # copy js src to js folder
+  if [[ "$fname" == *javascripts_src* ]]
+  then
+     minjsfname=${fname//javascripts_src/js}
+     cp "$fname.min.js" "$minjsfname.min.js"
+     echo "-----> move minified ${jsfile#*$BUILD_DIR/} to js folder"
+  fi
 done
 echo "       done."
 
