@@ -64,7 +64,7 @@ do
   cp "$fname.min.js" "$fname.$jssha1.js"
   echo "done"
   rm "$jsfile"
-  echo -n "-----> remove $jsfile"
+  echo "-----> remove $jsfile"
 done
 echo "       done."
 
